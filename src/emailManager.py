@@ -1,6 +1,48 @@
 import imaplib
 
+import poplib
+import string, random
+#import StringIO
+# import rfc822
+import logging
+
 class EmailManager(object):
+
+    """docstring for EmailManager."""
+    def __init__(self, configDict):
+        # self.configDict = configDict
+        self.FROM_EMAIL  = configDict["username"]
+        self.FROM_PWD    = configDict["userpass"]
+        self.POP_SERVER = configDict["popservername"]
+        self.POP_PORT   = configDict["popserverport"]
+        print(self.FROM_EMAIL)
+        self.__connect()
+
+    def __connect(self):
+        try:
+            self.server = poplib.POP3(self.POP_SERVER)
+            self.server.user(self.FROM_EMAIL)
+            self.server.pass_(self.FROM_PWD)
+        except Exception as e:
+            print(str(e))
+            raise
+
+    def getConnectionValidity(self):
+        try:
+            self.__checkMail()
+            return True
+        except Exception as e:
+            return False
+
+    def __checkMail(self):
+        print("emailManager : __checkMail")
+        try:
+            pass
+        except Exception as e:
+            raise
+
+
+class EmailImapManager(object):
 
     """docstring for EmailManager."""
     def __init__(self, configDict):

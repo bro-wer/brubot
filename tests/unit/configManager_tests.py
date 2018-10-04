@@ -22,6 +22,8 @@ class ConfigManager_tests(unittest.TestCase):
         requiredCredentials = [
         "username",
         "userpass",
+        "popservername",
+        "popserverport",
         ]
         for credential in requiredCredentials:
             self.assertTrue(credential in self.configManager.getEmailCredentials(),
